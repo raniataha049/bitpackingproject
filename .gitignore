@@ -38,3 +38,15 @@ __pycache__/
 
 # Bench artifacts
 bench/results.csv
+
+*.bin
+*.restored.txt
+input*.txt
+zeros.txt
+k5.txt
+k12.txt
+mix.txt
+.venv/
+__pycache__/
+bench/results.csv
+
