@@ -18,3 +18,23 @@ Thumbs.db
 
 # IDE
 .vscode/
+# Generated binaries & restored outputs
+*.bin
+*.restored.txt
+
+# Local datasets (test inputs)
+input*.txt
+zeros.txt
+k5.txt
+k12.txt
+mix.txt
+
+# Virtual envs / IDE
+.venv/
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+
+# Bench artifacts
+bench/results.csv
