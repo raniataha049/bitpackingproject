@@ -213,6 +213,24 @@ class BitPackerOverflow:
         idx = self._bitread(words, start, w_idx)
         off = idx * max(1, k_over)
         return self._bitread(over_words, off, max(1, k_over))
+        # --- helpers for tests / convenience ---
+    @classmethod
+    def from_list(cls, arr):
+        """Factory helper for tests: directly create compressed instance from list."""
+        self = cls()
+        self.blob = self.compress(arr)
+        self._n = len(arr)
+        return self
+
+    def decompress_self(self):
+        """Decompress internal blob to Python list."""
+        return self.decompress(self.blob)
+
+    def get_self(self, i):
+        """Return element i from the internally stored blob."""
+        return self.get(self.blob, i)
+    
+        
 # --- alias pour compatibilité avec la factory existante ---
 class BitPackingOverflow(BitPackerOverflow):
     pass
