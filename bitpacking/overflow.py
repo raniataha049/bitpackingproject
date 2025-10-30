@@ -237,6 +237,9 @@ class BitPackerOverflow:
     def get(self, i: int) -> int:
         """Return the i-th integer directly from the internally stored blob."""
         return self.get_blob(self.blob, i)
+    def to_list(self):
+        """Return the decompressed list of all integers (for tests)."""
+        return self.decompress(self.blob)
 
     def to_list(self):
         """Return the decompressed list of all integers (for tests)."""
