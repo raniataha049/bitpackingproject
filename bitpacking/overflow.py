@@ -234,6 +234,4 @@ class BitPackerOverflow:
 # --- alias pour compatibilité avec la factory existante ---
 class BitPackingOverflow(BitPackerOverflow):
     pass
-# --- alias pour compatibilité avec la factory existante ---
-class BitPackingOverflow(BitPackerOverflow):
-    pass
+
