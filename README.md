@@ -21,28 +21,32 @@ Le projet implémente **trois variantes** principales du BitPacking :
 
 bitpackingproject/
 │
-├── bitpacking/ # Noyau du projet : algorithmes de compression
-│ ├── core.py
-│ ├── crossing.py
-│ ├── noncrossing.py
-│ ├── overflow.py
-│ └── factory.py
+├── bitpacking/                # Noyau du projet : algorithmes de compression
+│   ├── __init__.py
+│   ├── core.py
+│   ├── crossing.py
+│   ├── noncrossing.py
+│   ├── overflow.py
+│   └── factory.py
 │
-├── cli/ # Interface ligne de commande (CLI)
-│ ├── bitpacking_cli.py
-│ └── overflow_cli.py
+├── cli/                       # Interface ligne de commande
+│   ├── __init__.py
+│   ├── bitpacking_cli.py
+│   └── overflow_cli.py
 │
-├── tests/ # Tests unitaires (Pytest)
-│ ├── test_core_bits.py
-│ ├── test_crossing.py
-│ ├── test_overflow.py
-│ └── test_smoke.py
+├── tests/                     # Tests unitaires
+│   ├── __init__.py
+│   ├── test_core_bits.py
+│   ├── test_crossing.py
+│   ├── test_overflow.py
+│   └── test_smoke.py
 │
-├── benchmark.py # Benchmark des performances et latence
-├── data.txt # Exemple de données à compresser
-├── requirements.txt # Dépendances Python
-├── README.md 
-└── Rania_Taha_BitPacking_Report.pdf # Rapport complet du projet
+├── benchmark.py
+├── data.txt
+├── requirements.txt
+├── README.md
+└── .gitignore
+
 
 
 
