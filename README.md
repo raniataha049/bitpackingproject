@@ -210,12 +210,7 @@ Mélangées	Inhomogène	Gestion des débordements	0–40 %	Overflow
 
 Petites valeurs	Homogène	Gain maximal	87.5 %	Crossing
 
-Auteurs et encadrement
- Rania Taha — Étudiante en Master 1 Informatique, parcours Intelligence Artificielle
 
-Encadrant : Jean-Charles Régin
-
-Université Côte d’Azur — Année universitaire 2025–2026
 
 Rapport complet
 Le rapport détaillé est disponible dans le fichier :
@@ -241,3 +236,10 @@ Une interface graphique (GUI) est envisagée pour une prochaine version.
 Conclusion
 Le projet BitPacking 2025 démontre l’efficacité d’une approche modulaire et performante pour la compression d’entiers sans perte.
 Grâce à ses trois modes de fonctionnement, il offre un excellent compromis entre vitesse, compacité et fiabilité, tout en restant simple à utiliser et à tester.
+
+Auteurs et encadrement
+ Rania Taha — Étudiante en Master 1 Informatique, parcours Intelligence Artificielle
+
+Encadrant : Jean-Charles Régin
+
+Université Côte d’Azur — Année universitaire 2025–2026
