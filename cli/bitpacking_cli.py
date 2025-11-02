@@ -11,10 +11,10 @@ from bitpacking.noncrossing import BitPackingNonCrossing
 
 def _read_ints_text(path: str) -> List[int]:
     ints: List[int] = []
-    # utf-8-sig => ignore le BOM si présent
+   
     with open(path, "r", encoding="utf-8-sig") as f:
         for line in f:
-            # autoriser espaces, virgules, points-virgules comme séparateurs
+            
             tokens = re.split(r"[,\s;]+", line.strip())
             for tok in tokens:
                 if tok == "":
@@ -41,7 +41,7 @@ def cli():
               type=click.Choice(["crossing", "non_crossing"]),
               help="Compression mode")
 def compress(input, output, mode):
-    """Compress input -> output (.bin)"""
+   
     ints = _read_ints_text(input)
     comp = CompressorFactory.create_from_list(mode, ints)
     save_binary(output, mode, comp.k, comp.n, comp.words)
@@ -52,7 +52,7 @@ def compress(input, output, mode):
 @click.option("--input", "-i", required=True, help="Input binary file (.bin)")
 @click.option("--output", "-o", required=True, help="Output plaintext file")
 def decompress(input, output):
-    """Decompress input (.bin) -> output (plaintext)"""
+    
     mode, k, n, words = load_binary(input)
     if mode == "crossing":
         comp = CompressorFactory.from_packed_crossing(k, n, words)
@@ -71,7 +71,7 @@ def decompress(input, output):
 @click.option("--input", "-i", required=True, help="Input binary file (.bin)")
 @click.option("--index", "-n", "index", required=True, type=int, help="Index to retrieve (0-based)")
 def get(input, index):
-    """Get the i-th integer without full decompression"""
+    
     mode, k, n, words = load_binary(input)
     if index < 0 or index >= n:
         raise click.ClickException("Index out of range")

@@ -3,11 +3,7 @@ from typing import List
 from .core import pack_bits, unpack_bits, WORD_BITS
 
 class BitPackingNonCrossing:
-    """
-    Mode 'non_crossing':
-    - Aucun entier ne traverse deux mots de 32 bits.
-    - Index start_bits[i] pré-calculé pour get(i) en O(1).
-    """
+   
     def __init__(self, k: int, n: int, words: List[int], start_bits: List[int]):
         if k < 0 or n < 0:
             raise ValueError("k and n must be >= 0")
@@ -43,7 +39,7 @@ class BitPackingNonCrossing:
 
             bit_in_word = pos % WORD_BITS
             if bit_in_word + k > WORD_BITS:
-                pos = ((pos // WORD_BITS) + 1) * WORD_BITS  # début du mot suivant
+                pos = ((pos // WORD_BITS) + 1) * WORD_BITS  
 
             start_bits.append(pos)
             pack_bits(words, start_bit=pos, value=x, width=k)

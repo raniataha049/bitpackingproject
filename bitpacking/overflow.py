@@ -35,13 +35,7 @@ def _choose_kprime(vals: List[int]) -> Tuple[int, int, int, int]:
 
 
 class BitPackerOverflow:
-    """
-    Overflow encoding with fixed-width slots (slot_w bits each).
-      - slot_w = 1 + max(k', idx_bits)
-      - For each slot:
-         flag(1b) + payload (k' if flag=0, else idx_bits) + padding to reach slot_w
-      - overflow area: values on k_over bits, tightly packed (crossing)
-    """
+    
 
     @staticmethod
     def _emit_crossing(words: List[int], bitbuf: int, bitlen: int, bits: int, width: int):
@@ -221,7 +215,7 @@ class BitPackerOverflow:
     # --- helpers for tests / compatibility ---
     @classmethod
     def from_list(cls, arr):
-        """Factory helper for tests: directly create compressed instance from list."""
+        
         self = cls()
         self.blob = self.compress(arr)
         self.n = len(arr)
@@ -231,21 +225,21 @@ class BitPackerOverflow:
         return self
 
     def decompress_self(self):
-        """Decompress internal blob to Python list."""
+        
         return self.decompress(self.blob)
 
     def get(self, i: int) -> int:
-        """Return the i-th integer directly from the internally stored blob."""
+        
         return self.get_blob(self.blob, i)
     def to_list(self):
-        """Return the decompressed list of all integers (for tests)."""
+        
         return self.decompress(self.blob)
 
     def to_list(self):
-        """Return the decompressed list of all integers (for tests)."""
+        
         return self.decompress(self.blob)
 
 
-# --- alias pour compatibilité avec la factory existante ---
+
 class BitPackingOverflow(BitPackerOverflow):
     pass

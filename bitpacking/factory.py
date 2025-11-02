@@ -10,7 +10,7 @@ from .overflow import BitPackingOverflow
 MAGIC = b"BPK1"
 MODE_CROSSING = 0
 MODE_NONCROSS = 1
-# (On n'encode pas encore l'overflow dans le fichier .bin du CLI, on l'utilisera plus tard si besoin)
+
 
 
 class CompressorFactory:
@@ -29,7 +29,7 @@ class CompressorFactory:
 
     @staticmethod
     def from_packed_noncross(k: int, n: int, words: List[int]) -> BitPackingNonCrossing:
-        # Recalcule start_bits déterministiquement
+        
         start_bits: List[int] = []
         pos = 0
         for _ in range(n):
@@ -54,7 +54,7 @@ def save_binary(path: str, mode_str: str, k: int, n: int, words: List[int]) -> N
         raise ValueError(f"Unknown mode: {mode_str}")
 
     wlen = len(words)
-    # header: MAGIC (4s) + mode (B) + k (H) + n (I) + wlen (I)
+    
     header = struct.pack("<4sBHI I", MAGIC, mode, k, n, wlen)
     body = b"".join(struct.pack("<I", w & 0xFFFFFFFF) for w in words)
     with open(path, "wb") as f:

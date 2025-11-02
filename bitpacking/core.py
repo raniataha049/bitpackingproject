@@ -3,28 +3,21 @@ WORD_MASK = 0xFFFFFFFF
 
 
 def words_needed(total_bits: int) -> int:
-    """Return how many 32-bit words are needed to store total_bits."""
+   
     if total_bits <= 0:
         return 0
     return (total_bits + WORD_BITS - 1) // WORD_BITS
 
 
 def _ensure_words_capacity(words: list[int], total_bits: int) -> None:
-    """Extend words with zeros so it can store total_bits bits."""
+    
     needed = words_needed(total_bits)
     if needed > len(words):
         words.extend([0] * (needed - len(words)))
 
 
 def pack_bits(words: list[int], start_bit: int, value: int, width: int) -> None:
-    """
-    Pack 'value' encoded on 'width' bits starting at absolute bit index 'start_bit'
-    into the 32-bit little-endian bit layout (bit 0 is LSB of words[0]).
-    Extends 'words' if necessary.
-
-    Raises:
-        ValueError if value doesn't fit in 'width' bits or if width < 0.
-    """
+   
     if width < 0:
         raise ValueError("width must be >= 0")
     if width == 0:
@@ -55,11 +48,7 @@ def pack_bits(words: list[int], start_bit: int, value: int, width: int) -> None:
 
 
 def unpack_bits(words: list[int], start_bit: int, width: int) -> int:
-    """
-    Read 'width' bits starting at absolute bit index 'start_bit' from 'words'
-    and return it as a non-negative int.
-    Bits beyond current words length are treated as zeros.
-    """
+    
     if width < 0:
         raise ValueError("width must be >= 0")
     if width == 0:

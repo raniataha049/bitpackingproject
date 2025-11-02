@@ -1,10 +1,11 @@
 ﻿import click, re
 from typing import List
 from bitpacking.overflow import BitPackerOverflow
+from pathlib import Path
 
 def _read_ints_text(path: str) -> List[int]:
     ints: List[int] = []
-    # lecture tolérante (UTF-8 et BOM), séparateurs: espace, virgule, point-virgule
+   
     with open(path, "r", encoding="utf-8-sig", errors="ignore") as f:
         for line in f:
             for tok in re.split(r"[,\s;]+", line.strip()):
@@ -43,17 +44,25 @@ def decompress(input_path: str, output_path: str):
     out = packer.decompress(blob)
     _write_ints_one_line(output_path, out)
     click.echo(f"OK: decompressed {len(out)} integers (overflow)")
-
 @cli.command()
-@click.option("--input", "input_path", required=True, type=click.Path(exists=True))
+@click.option("--input", "input", required=True)
 @click.option("--index", "index", required=True, type=int)
-def get(input_path: str, index: int):
-    """Renvoie la valeur à l'indice i directement depuis le binaire OVERFLOW."""
-    with open(input_path, "rb") as f:
-        blob = f.read()
+def get(input, index):
+    """Renvoie la valeur à l'indice i directement depuis le fichier overflow."""
+    from pathlib import Path
+    from bitpacking.overflow import BitPackerOverflow
+
+    # Lire le fichier binaire
+    blob = Path(input).read_bytes()
+
+    # Créer une instance du packer et lui assigner le blob
     packer = BitPackerOverflow()
-    val = packer.get(blob, index)
-    click.echo(f"{val}")
+    packer.blob = blob  
+
+    
+    val = packer.get(index)
+
+    print(val)
 
 if __name__ == "__main__":
     cli()

@@ -3,11 +3,7 @@ from typing import List
 from .core import pack_bits, unpack_bits, words_needed, WORD_BITS, WORD_MASK
 
 class BitPackingCrossing:
-    """
-    Bit packing en mode 'crossing' (les entiers peuvent chevaucher 2 mots).
-    Accès direct O(1) via offset i*k.
-    """
-
+    
     def __init__(self, k: int, n: int, words: List[int]):
         if k < 0:
             raise ValueError("k must be >= 0")
