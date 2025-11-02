@@ -91,14 +91,45 @@ python -m cli.bitpacking_cli decompress -i data.cross.bin -o data_out.txt
 Mode Non-crossing
 
 python -m cli.bitpacking_cli compress -i data.txt -o data.noncross.bin -m non_crossing
+Résultats affichés :
+OK: 7 integers -> 3 words (k=12, mode=crossing)
+OK: decompressed 7 integers (reconstructed mode: k=12, mode=crossing)
 
 python -m cli.bitpacking_cli decompress -i data.noncross.bin -o data_out2.txt
+
+Résultats affichés :
+
+OK: 7 integers -> 4 words (k=12, mode=non_crossing)
+
+OK: decompressed 7 integers (reconstructed mode: k=12, mode=non_crossing)
+
+Vérification :
+
+cmd /c fc data.txt data_out2.txt
+
+**Comparaison des fichiers data.txt et DATA_OUT2.TXT
+
+FC : aucune différence trouvée
 
 Mode Overflow
 
 python -m cli.overflow_cli compress --input data.txt --output data.ovf
 
 python -m cli.overflow_cli decompress --input data.ovf --output data_out3.txt
+
+Résultats affichés :
+
+OK: 7 integers -> overflow binary (37 bytes)
+
+OK: decompressed 7 integers (overflow)
+
+Vérification :
+
+cmd /c fc data.txt data_out3.txt
+
+**Comparaison des fichiers data.txt et DATA_OUT3.TXT
+
+FC : aucune différence trouvée
 
 🔸 Accès direct à une valeur compressée (fonction get)
 Le projet implémente une commande spéciale permettant d’accéder directement à une valeur compressée sans décompresser tout le fichier.
