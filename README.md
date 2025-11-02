@@ -61,6 +61,7 @@ Set-Content -Path data.txt -Value "1 2 3 1024 4 5 2048" -Encoding utf8
 Le fichier data.txt contiendra :
 
 1 2 3 1024 4 5 2048
+
  Utilisation
 Compression et décompression standard
 Mode Crossing
