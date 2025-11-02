@@ -26,36 +26,90 @@ Le projet implémente **trois variantes** principales du BitPacking :
 ```
 bitpackingproject/
 │
-├──bitpacking/                # Noyau du projet : algorithmes de compression
-│   ├── __init__.py
-│   ├── core.py
-│   ├── crossing.py
-│   ├── noncrossing.py
-│   ├── overflow.py
-│   └── factory.py
+├── bitpacking/    # Cœur du projet : logique de compression
+│ ├── __init__.py    # Rend le dossier importable en module Python
+│ ├── core.py       # Fonctions binaires communes (pack/unpack bits)
+│ ├── crossing.py    # Mode Crossing → compression maximale (bits partagés)
+│ ├── noncrossing.py      # Mode Non-crossing → alignement sur mots binaires
+│ ├── overflow.py         # Mode Overflow → gestion des débordements
+│ └── factory.py          # Fabrique : crée dynamiquement le bon compresseur
 │
-├── cli/                       # Interface ligne de commande
-│   ├── __init__.py
-│   ├── bitpacking_cli.py
-│   └── overflow_cli.py
+├── cli/                  # Interface utilisateur (Command Line Interface)
+│ ├── __init__.py          # Rend le package exécutable (obligatoire)
+│ ├── bitpacking_cli.py      # CLI principale : crossing / non_crossing
+│ └── overflow_cli.py       # CLI spécifique au mode overflow
 │
-├── tests/                     # Tests unitaires
-│   ├── __init__.py
-│   ├── test_core_bits.py
-│   ├── test_crossing.py
-│   ├── test_overflow.py
-│   └── test_smoke.py
+├── tests/ #Tests unitaires (Pytest)
+│ ├── __init__.py           # Package d’import pour les tests
+│ ├── test_core_bits.py      # Teste la manipulation des bits (core)
+│ ├── test_crossing.py       # Teste la logique crossing
+│ ├── test_overflow.py          # Teste la logique overflow
+│ └── test_smoke.py            # Test global : vérifie le bon import des modules
 │
-├── benchmark.py
-├── data.txt
-├── requirements.txt
-├── README.md
-└── .gitignore
+├── benchmark.py       #Mesure les performances et la latence
+│
+├── data.txt         # Jeu de données d’exemple (entiers à compresser)
+│
+├── requirements.txt        # Dépendances Python (click, pytest, packaging…)
+│
+├── README.md           # Documentation du projet (exécution, modes, exemples)
+│
+├── .gitignore         # exclusion des fichiers inutiles (.pyc, __pycache__, .bin…)
+│
+└── Rania_Taha_BitPacking_Report.pdf      # Rapport du projet
+```
+## Compatibilité système
+
+- Windows 10 / 11
+- macOS (Ventura, Sonoma)
+- Linux (Ubuntu, Debian, Mint, Fedora, etc.)
+
+Le code ne dépend d’aucun composant spécifique au système :
+il fonctionne sur tous les systèmes disposant de Python 3.9+, avec les mêmes commandes pour compresser et décompresser les fichiers.
+
+La seule différence concerne l’activation de l’environnement virtuel :
+```powershell
+Étape	                      Windows	                                macOS / Linux
+Créer l’environnement	      python -m venv env	                    python3 -m venv env
+Activer l’environnement	    env\Scripts\activate	                  source env/bin/activate
+Installer les dépendances  	pip install -r requirements.txt	        pip install -r requirements.txt
+Exécuter les commandes	    python -m cli.bitpacking_cli ...	      python3 -m cli.bitpacking_cli ...
+```
+ ## Prérequis généraux
+
+Avant d’exécuter le projet, assurez-vous d’avoir installé :
+
+Python 3.9 ou supérieur
+Vérifiez avec :
+```powershell
+python3 --version
+
+```
+pip (gestionnaire de paquets Python)
+Vérifiez avec :
+```powershell
+pip3 --version
 ```
 
+Git (pour cloner le dépôt)
+```powershell
+git --version
+```
+##Bibliothèques Python utilisées
 
+Voici les bibliothèques nécessaires pour exécuter le projet :
+📚 Bibliothèques Python utilisées
 
-
+Voici les bibliothèques nécessaires pour exécuter le projet :
+```powershell
+Bibliothèque	       Rôle	                                        Installation
+click	         Gestion des commandes en ligne de commande (CLI) 	pip install click
+pytest	       Tests unitaires et validation du code	            pip install pytest
+time (librairie standard)	Mesure des temps d’exécution	          incluse avec Python
+struct (librairie standard)	Manipulation binaire	                incluse avec Python
+os (librairie standard)	Gestion des fichiers	                    incluse avec Python
+sys (librairie standard)	Interaction avec le système	            incluse avec Python
+```
 ##  Installation
 
 ### 1- Cloner le dépôt
@@ -72,6 +126,12 @@ cd bitpackingproject
 
 ### 3- Installer les dépendances
 
+Créez un fichier requirements.txt dans votre projet contenant :
+```powershell
+click
+pytest
+```
+Installez-les ensuite :
 ```powershell
 pip install -r requirements.txt
 ```
