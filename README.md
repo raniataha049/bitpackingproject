@@ -10,14 +10,19 @@ Cette méthode est largement utilisée dans :
 - les **protocoles réseau**  
 - et les **applications d’intelligence artificielle** manipulant de grands volumes de données numériques.
 
+
 Le projet implémente **trois variantes** principales du BitPacking :
+
 - **Crossing** → Compression maximale avec chevauchement de bits  
+
 - **Non-crossing** → Alignement sur mots mémoire pour une lecture plus simple  
+
 - **Overflow** → Gestion robuste des valeurs dépassant la capacité binaire  
 
 ---
 
 ##  Architecture du projet
+
 
 bitpackingproject/
 │
@@ -52,11 +57,17 @@ bitpackingproject/
 
 ##  Installation
  1- Cloner le dépôt
+
 git clone https://github.com/raniataha049/bitpackingproject.git
+
 cd bitpackingproject
+
 2- Installer les dépendances
+
 pip install -r requirements.txt
+
  Création du fichier de test data.txt
+
 Avant de lancer les commandes de compression, crée un fichier d’exemple contenant une suite d’entiers :
 
 
@@ -66,19 +77,29 @@ Le fichier data.txt contiendra :
 
 1 2 3 1024 4 5 2048
 
+
  Utilisation
+
 Compression et décompression standard
+
 Mode Crossing
+
 python -m cli.bitpacking_cli compress -i data.txt -o data.cross.bin -m crossing
+
 python -m cli.bitpacking_cli decompress -i data.cross.bin -o data_out.txt
+
 Mode Non-crossing
 
 python -m cli.bitpacking_cli compress -i data.txt -o data.noncross.bin -m non_crossing
+
 python -m cli.bitpacking_cli decompress -i data.noncross.bin -o data_out2.txt
+
 Mode Overflow
 
 python -m cli.overflow_cli compress --input data.txt --output data.ovf
+
 python -m cli.overflow_cli decompress --input data.ovf --output data_out3.txt
+
 🔸 Accès direct à une valeur compressée (fonction get)
 Le projet implémente une commande spéciale permettant d’accéder directement à une valeur compressée sans décompresser tout le fichier.
 Cette opération est très rapide (complexité O(1)).
@@ -86,21 +107,28 @@ Cette opération est très rapide (complexité O(1)).
 Exemple d’utilisation :
 
 python -m cli.overflow_cli get --input data.ovf --index 3
+
  Résultat attendu :
 
 3
- Cela signifie que le 4ᵉ entier compressé (index 3) vaut 3.
+
+Cela signifie que le 4ᵉ entier compressé (index 3) vaut 3.
+
 Cette fonctionnalité prouve que la structure binaire permet un accès aléatoire direct, idéal pour les applications Big Data et systèmes embarqués.
 
 Tests unitaires
+
 Pour exécuter l’ensemble des tests :
 
 
 python -m pytest -v
+
 tous les tests doivent passer :
 
 14 passed in 0.3s
+
 Benchmark
+
 Pour mesurer les performances :
 
 
@@ -109,26 +137,46 @@ Exemple de sortie :
 
 
 === BENCHMARK BITPACKING 2025 ===
+
 Mode : crossing
+
 Type de données : petites valeurs
+
 n = 1000 entiers
+
 Gain : 87.5 %
+
 Tcomp : 0.9881 ms
+
 Tdecomp : 0.6676 ms
+
 Tget : 0.0032 ms
+
 Latence seuil t_seuil : 0.00005913 ms/bit
+
 Résultats principaux
+
 Mode	Type de données	Gain (%)	Tcomp (ms)	Tdecomp (ms)	Tget (ms)
+
 Crossing	Aléatoire	62.5	1.66	1.05	0.0076
+
 Non-crossing	Aléatoire	62.5	1.64	0.89	0.0071
+
 Overflow	Aléatoire	0.0	2.32	1.61	0.0706
+
 Crossing	Petites valeurs	87.5	0.9881	0.6676	0.0032
 
+
 Types de données testées
+
 Type	Structure	Objectif	Gain observé	Mode optimal
+
 Aléatoires	Dispersée	Mesure de stabilité	62.5 %	Crossing / Non-crossing
+
 Croissantes	Ordonnée	Vérification de cohérence	62.5 %	Crossing
+
 Mélangées	Inhomogène	Gestion des débordements	0–40 %	Overflow
+
 Petites valeurs	Homogène	Gain maximal	87.5 %	Crossing
 
 Auteurs et encadrement
