@@ -21,7 +21,7 @@ Le projet implémente **trois variantes** principales du BitPacking :
 
 bitpackingproject/
 │
-├── bitpacking/                # Noyau du projet : algorithmes de compression
+├──bitpacking/                # Noyau du projet : algorithmes de compression
 │   ├── __init__.py
 │   ├── core.py
 │   ├── crossing.py
